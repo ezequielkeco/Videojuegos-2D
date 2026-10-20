@@ -17,13 +17,18 @@ public class MovimientoPersonaje : MonoBehaviour
     [SerializeField] private float radioDeteccion = 0.15f;
 
     private Rigidbody2D rb;
+    private Animator animator;
     private float movimientoHorizontal;
     private bool solicitarSalto;
     private bool estaEnSuelo;
+    private SpriteRenderer spriteRenderer;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         rb.gravityScale = gravedadNormal;
     }
 
@@ -43,6 +48,23 @@ public class MovimientoPersonaje : MonoBehaviour
             movimientoHorizontal = 1f;
         }
 
+        if (animator != null)
+        {
+            animator.SetFloat("Velocidad", Mathf.Abs(movimientoHorizontal));
+        }
+
+        if (spriteRenderer != null)
+        {
+            if (movimientoHorizontal < 0f)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else if (movimientoHorizontal > 0f)
+            {
+                spriteRenderer.flipX = false;
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             solicitarSalto = true;
@@ -56,6 +78,11 @@ public class MovimientoPersonaje : MonoBehaviour
             radioDeteccion,
             capaSuelo
         );
+
+        if (animator != null)
+        {
+            animator.SetBool("EnSuelo", estaEnSuelo);
+        }
 
         float factorControl = estaEnSuelo ? 1f : controlAereo;
 
