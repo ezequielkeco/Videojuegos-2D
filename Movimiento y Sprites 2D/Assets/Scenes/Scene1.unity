@@ -408,6 +408,7 @@ GameObject:
   - component: {fileID: 137544950}
   - component: {fileID: 137544949}
   - component: {fileID: 137544953}
+  - component: {fileID: 137544954}
   m_Layer: 0
   m_Name: Personaje
   m_TagString: Untagged
@@ -586,6 +587,28 @@ MonoBehaviour:
     m_Bits: 8
   puntoSuelo: {fileID: 1047109132}
   radioDeteccion: 0.15
+--- !u!95 &137544954
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137544948}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6547dd47887877b48ab8cfe9911b90c7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &143964133
 GameObject:
   m_ObjectHideFlags: 0
@@ -6275,8 +6298,8 @@ Transform:
   m_GameObject: {fileID: 1157143512}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3668, y: -2.957, z: 0}
-  m_LocalScale: {x: 10.653346, y: 1, z: 1}
+  m_LocalPosition: {x: 0.3915, y: -2.957, z: 0}
+  m_LocalScale: {x: 10.604341, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
