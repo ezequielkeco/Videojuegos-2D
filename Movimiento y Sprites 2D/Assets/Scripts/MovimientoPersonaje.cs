@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class MovimientoPersonaje : MonoBehaviour
 {
@@ -16,6 +17,11 @@ public class MovimientoPersonaje : MonoBehaviour
     [SerializeField] private Transform puntoSuelo;
     [SerializeField] private float radioDeteccion = 0.15f;
 
+    [Header("Sistema de coleccionables")]
+    [SerializeField] private TMP_Text contadorJuego;
+
+    private int objetosRecolectados = 0;
+    private int totalObjetos = 6;
     private Rigidbody2D rb;
     private Animator animator;
     private float movimientoHorizontal;
@@ -131,5 +137,30 @@ public class MovimientoPersonaje : MonoBehaviour
             puntoSuelo.position,
             radioDeteccion
         );
+    }
+
+    private void ActualizarContador()
+    {
+        if (contadorJuego != null)
+        {
+            contadorJuego.text = $"Objetos: {objetosRecolectados} / {totalObjetos}";
+        }
+    }
+
+    private void Start()
+    {
+        ActualizarContador();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Collectible"))
+        {
+            objetosRecolectados++;
+
+            ActualizarContador();
+
+            Destroy(other.gameObject);
+        }
     }
 }
