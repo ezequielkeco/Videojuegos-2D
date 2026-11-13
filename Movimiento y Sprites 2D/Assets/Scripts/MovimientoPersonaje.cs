@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MovimientoPersonaje : MonoBehaviour
 {
@@ -19,6 +21,11 @@ public class MovimientoPersonaje : MonoBehaviour
 
     [Header("Sistema de coleccionables")]
     [SerializeField] private TMP_Text contadorJuego;
+
+    [Header("Game Over")]
+    [SerializeField] private GameObject panelGameOver;
+
+    private bool juegoTerminado = false;
 
     private int objetosRecolectados = 0;
     private int totalObjetos = 6;
@@ -163,4 +170,32 @@ public class MovimientoPersonaje : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") && !juegoTerminado)
+        {
+            juegoTerminado = true;
+
+            Debug.Log("Game Over: El personaje ha tocado un enemigo.");
+
+            panelGameOver.SetActive(true);
+
+            Time.timeScale = 0f;
+
+            StartCoroutine(ReiniciarNivel());
+        }
+    }
+
+    private IEnumerator ReiniciarNivel()
+    {
+        yield return new WaitForSecondsRealtime(3f);
+
+        Time.timeScale = 1f;
+
+        SceneManager.LoadScene(
+            SceneManager.GetActiveScene().name
+        );
+    }
 }
+
